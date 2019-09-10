@@ -15,7 +15,7 @@ namespace Snake
 
         public Food()
         {
-            this.X = 320;
+            this.X = 200;
             this.Y = 200;
         }
 
@@ -30,7 +30,8 @@ namespace Snake
         public void Randomize()
         {
             this.X = rand.Next(1, Form1.forma.Width / 20) * 20;
-            this.Y = rand.Next(3, Form1.forma.Height / 20) * 20;
+            this.Y = rand.Next(1, Form1.forma.Height / 20) * 20;
+            if(this.Y <= 20) { this.Y = rand.Next(1, Form1.forma.Height / 20) * 20; }
         }
 
         internal void Draw(PaintEventArgs e)

@@ -12,7 +12,12 @@ namespace Snake
     {
         public int X { get; set; }
         public int Y { get; set; }
-        
+
+        public BodyPart()
+        {
+
+        }
+
         public BodyPart(int X, int Y)
         {
             this.X = X;
@@ -21,7 +26,7 @@ namespace Snake
 
         internal void Draw(PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(Brushes.Green, this.X, this.Y, 25, 25);
+            e.Graphics.FillRectangle(Brushes.Green, this.X, this.Y, 20, 20);
         }
         
     }

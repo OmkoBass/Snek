@@ -15,6 +15,7 @@ namespace Snake
         Keys keyMove;
         Snek snek = new Snek(200, 200);
         Food food = new Food();
+
         int pts = 0;
 
         public static Form1 forma;
@@ -24,27 +25,50 @@ namespace Snake
             switch (keyMove)
             {
                 case Keys.Up:
-                    if(snek.Y <= 40) { GameTimer.Stop(); MessageBox.Show("Game Over!"); Environment.Exit(0); }
+                    if(hitWalls() == true /*|| ateMySelf() == true*/) { GameOver(); }
                     if(snek.Direction == Direction.DOWN) { snek.Down(); }
                     else { snek.Up(); }
                     break;
                 case Keys.Down:
-                    if (snek.Y >= this.Height) { GameTimer.Stop(); MessageBox.Show("Game Over!"); Environment.Exit(0); }
+                    if (hitWalls() == true /*|| ateMySelf() == true*/) { GameOver(); }
                     if (snek.Direction == Direction.UP) { snek.Up(); }
                     else { snek.Down(); }
                     break;
                 case Keys.Left:
-                    if (snek.X <= 0) { GameTimer.Stop(); MessageBox.Show("Game Over!"); Environment.Exit(0); }
+                    if (hitWalls() == true /*|| ateMySelf() == true*/) { GameOver(); }
                     if (snek.Direction == Direction.RIGHT) { snek.Right(); }
                     else { snek.Left(); }
                     break;
                 case Keys.Right:
-                    if (snek.X >= this.Width) { GameTimer.Stop(); MessageBox.Show("Game Over!"); Environment.Exit(0); }
+                    if (hitWalls() == true /*|| ateMySelf() == true*/) { GameOver(); }
                     if (snek.Direction == Direction.LEFT) { snek.Left(); }
                     else { snek.Right(); }
                     break;
             }
-            if(Ate() == true) { food.Randomize(); pts += 100; score.Text = pts.ToString(); }
+            if(Ate() == true)
+            {
+                food.Randomize(); pts += 100;
+                score.Text = pts.ToString();
+                BodyPart bodypart = new BodyPart();
+                snek.snakeBody.Add(bodypart);
+            }
+        }
+
+        private void GameOver() { GameTimer.Stop(); MessageBox.Show("Game Over!"); Environment.Exit(0); }
+
+        private bool hitWalls()
+        {
+            if(snek.Y <= 20) { return true; }
+            else if(snek.Y >= this.Height) { return true; }
+            else if(snek.X <= 0) { return true; }
+            else if(snek.X >= this.Width) { return true; }
+            else { return false; }
+        }
+
+        private bool ateMySelf()
+        {
+            //TODO:
+            return true;
         }
 
         private bool Ate()
@@ -56,6 +80,8 @@ namespace Snake
         public Form1()
         {
             InitializeComponent();
+            BodyPart snakeHead = new BodyPart(snek.X, snek.Y);
+            snek.snakeBody.Add(snakeHead);
             forma = this;
         }
 
@@ -63,11 +89,12 @@ namespace Snake
         {
             Graphics g = e.Graphics;
             Pen granica = new Pen(Color.Black);
-            g.DrawLine(granica, 0, 40, this.Width, 40);
+            g.DrawLine(granica, 0, 30, this.Width, 30);
 
             GameTimer.Start();
 
             snek.Draw(e);
+            snek.DrawBody(e);
             food.Draw(e);
             moveSnek();
         }
