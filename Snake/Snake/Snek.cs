@@ -8,7 +8,6 @@ using System.Drawing;
 
 namespace Snake
 {
-
     enum Direction { UP, DOWN, LEFT, RIGHT }
 
     class Snek
@@ -27,26 +26,26 @@ namespace Snake
 
         internal void Draw(PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(Brushes.Green, this.X, this.Y, 25, 25);
+            e.Graphics.FillRectangle(Brushes.Green, this.X, this.Y, 20, 20);
         }
         public void Up()
         {
-            this.Y -= 10;
+            this.Y -= 20;
             this.Direction = Direction.UP;
         }
         public void Down()
         {
-            this.Y += 10;
+            this.Y += 20;
             this.Direction = Direction.DOWN;
         }
         public void Left()
         {
-            this.X -= 10;
+            this.X -= 20;
             this.Direction = Direction.LEFT;
         }
         public void Right()
         {
-            this.X += 10;
+            this.X += 20;
             this.Direction = Direction.RIGHT;
         }
 

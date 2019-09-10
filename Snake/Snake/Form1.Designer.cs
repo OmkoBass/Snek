@@ -65,6 +65,7 @@
             this.ClientSize = new System.Drawing.Size(804, 461);
             this.Controls.Add(this.score);
             this.Controls.Add(this.points);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Snek";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);

@@ -12,25 +12,30 @@ namespace Snake
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public bool Eaten { get; set; }
 
         public Food()
         {
-            this.X = 460;
-            this.Y = 320;
-            this.Eaten = false;
+            this.X = 320;
+            this.Y = 200;
         }
 
         public Food(int X, int Y)
         {
             this.X = X;
             this.Y = Y;
-            this.Eaten = false;
+        }
+
+        private Random rand = new Random();
+
+        public void Randomize()
+        {
+            this.X = rand.Next(1, Form1.forma.Width / 20) * 20;
+            this.Y = rand.Next(3, Form1.forma.Height / 20) * 20;
         }
 
         internal void Draw(PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(Brushes.Red, this.X, this.Y, 25, 25);
+            e.Graphics.FillRectangle(Brushes.Red, this.X, this.Y, 20, 20);
         }
     }
 }
