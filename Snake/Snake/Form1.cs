@@ -1,50 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Snake
 {
     public partial class Form1 : Form
     {
-        List<Snek> snake = new List<Snek>();
+        Keys keyMove;
+        static Snek snek = new Snek(150, 150);
+        
 
-        void generateSnek(PaintEventArgs e)
+        private void bodyPart()
         {
-            Snek s = new Snek(150, 150);
-            snake.Add(s);
-            e.Graphics.FillRectangle(Brushes.Green, snake[snake.Count() - 1].X, snake[snake.Count() - 1].Y, 25, 25);
+            
         }
 
-        void generateFood(PaintEventArgs e)
+        private void moveSnek()
         {
-            Random r = new Random();
-            int x = r.Next(0, 820);
-            int y = r.Next(0, 460);
-            e.Graphics.FillEllipse(Brushes.Red, x, y, 25, 25);
+            switch (keyMove)
+            {
+                case Keys.Up:
+                    if(snek.Y <= 40) { GameTimer.Stop(); MessageBox.Show("Game Over!"); Environment.Exit(0); }
+                    if(snek.Direction == Direction.DOWN) { snek.Down(); }
+                    else { snek.Up(); }
+                    break;
+                case Keys.Down:
+                    if (snek.Y >= 420) { GameTimer.Stop(); MessageBox.Show("Game Over!"); Environment.Exit(0); }
+                    if (snek.Direction == Direction.UP) { snek.Up(); }
+                    else { snek.Down(); }
+                    break;
+                case Keys.Left:
+                    if (snek.X <= 0) { GameTimer.Stop(); MessageBox.Show("Game Over!"); Environment.Exit(0); }
+                    if (snek.Direction == Direction.RIGHT) { snek.Right(); }
+                    else { snek.Left(); }
+                    break;
+                case Keys.Right:
+                    if (snek.X >= 780) { GameTimer.Stop(); MessageBox.Show("Game Over!"); Environment.Exit(0); }
+                    if (snek.Direction == Direction.LEFT) { snek.Left(); }
+                    else { snek.Right(); }
+                    break;
+            }
         }
 
         public Form1()
         {
             InitializeComponent();
-            moveTimer.Start();
+            
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            generateSnek(e);
+            Graphics g = e.Graphics;
+            Pen granica = new Pen(Color.Black);
+            g.DrawLine(granica, 0, 40, 820, 40);
+
+            GameTimer.Start();
+
+            snek.Draw(e);
+
+            moveSnek();
         }
 
-        private void MoveTimer_Tick(object sender, EventArgs e)
+        private void GameTimer_Tick(object sender, EventArgs e)
         {
-            for (int i = 0; i < snake.Count(); i++)
-            {
-                snake[i].X += 10;
-                snake[i].Y += 10;
-            }
+            
 
             Invalidate();
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            keyMove = e.KeyCode;
+            moveSnek();
         }
     }
 }

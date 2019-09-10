@@ -29,28 +29,56 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.moveTimer = new System.Windows.Forms.Timer(this.components);
+            this.points = new System.Windows.Forms.Label();
+            this.GameTimer = new System.Windows.Forms.Timer(this.components);
+            this.score = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // moveTimer
+            // points
             // 
-            this.moveTimer.Tick += new System.EventHandler(this.MoveTimer_Tick);
+            this.points.AutoSize = true;
+            this.points.Font = new System.Drawing.Font("Fira Code", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.points.Location = new System.Drawing.Point(12, 9);
+            this.points.Name = "points";
+            this.points.Size = new System.Drawing.Size(82, 25);
+            this.points.TabIndex = 0;
+            this.points.Text = "Points:";
+            // 
+            // GameTimer
+            // 
+            this.GameTimer.Tick += new System.EventHandler(this.GameTimer_Tick);
+            // 
+            // score
+            // 
+            this.score.AutoSize = true;
+            this.score.Font = new System.Drawing.Font("Fira Code", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.score.Location = new System.Drawing.Point(89, 9);
+            this.score.Name = "score";
+            this.score.Size = new System.Drawing.Size(22, 25);
+            this.score.TabIndex = 1;
+            this.score.Text = "0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 421);
+            this.ClientSize = new System.Drawing.Size(804, 461);
+            this.Controls.Add(this.score);
+            this.Controls.Add(this.points);
             this.Name = "Form1";
             this.Text = "Snek";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Timer moveTimer;
+        private System.Windows.Forms.Label points;
+        private System.Windows.Forms.Timer GameTimer;
+        private System.Windows.Forms.Label score;
     }
 }
 

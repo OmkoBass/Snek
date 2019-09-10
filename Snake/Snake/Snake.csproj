@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AFE05660-4493-435D-B5AB-2E4947989DBC}</ProjectGuid>
+    <ProjectGuid>{8D2E0CEA-E476-43AD-9181-50FEE0E1B303}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Snake</RootNamespace>
     <AssemblyName>Snake</AssemblyName>
@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BodyPart.cs" />
+    <Compile Include="Food.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
