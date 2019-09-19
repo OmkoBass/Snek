@@ -47,6 +47,8 @@ namespace Snake
             }
             if(Ate() == true)
             {
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"AutismHamza.wav");
+                player.Play();
                 food.Randomize(); pts += 100;
                 score.Text = pts.ToString();
                 BodyPart bodypart = new BodyPart();
